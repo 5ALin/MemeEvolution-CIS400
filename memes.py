@@ -11,8 +11,8 @@ from transformers import pipeline
 model = models.resnet50(weights="IMAGENET1K_V1") 
 model.eval()
 
-nlp = pipeline("zero-shot-classification", model="facebook/bart-large-mnli", framework="pt")
-sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
+nlp = pipeline("zero-shot-classification", model="facebook/bart-large-mnli", framework="pt") # Pipeline for classification
+sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english") # Pipeline for Sentiment Analysis
 
 known_memes = {
     "Distracted Boyfriend": "A man looks at another woman while his girlfriend looks on disapprovingly.",
@@ -22,13 +22,13 @@ known_memes = {
 
 def extract_text_from_image(image_path):
     img = cv2.imread(image_path)
-    gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    text = pytesseract.image_to_string(gray_img)
+    gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # grayscale
+    text = pytesseract.image_to_string(gray_img) # get text
     return text.strip()
 
 def classify_meme(image_path):
     img = Image.open(image_path)
-    img = img.convert('RGB')  
+    img = img.convert('RGB')  # convert to pytesseract reqs
     transform = transforms.Compose([
         transforms.Resize((224, 224)),  
         transforms.ToTensor(),  
@@ -48,7 +48,7 @@ def infer_topic_from_text(text):
     if not text.strip():  
         return "Unknown Topic"  
     
-    possible_labels = ["politics", "work", "relationships", "life", "technology", "education"]
+    possible_labels = ["politics", "work", "relationships", "life", "technology", "education"] # preset topics
     result = nlp(text, candidate_labels=possible_labels)
     return result['labels'][0]
 
@@ -74,7 +74,7 @@ def analyze_all_memes_in_folder(folder_path):
     meme_results = []
     sentiment_counts = {}  
     
-    for filename in os.listdir(folder_path):
+    for filename in os.listdir(folder_path): 
         if filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".webp") or filename.endswith(".jpeg"): 
             image_path = os.path.join(folder_path, filename)
             print(f"Analyzing: {filename}")
@@ -152,10 +152,11 @@ def calculate_total_sentiment_percentages(sentiment_counts):
     return total_summary
 
 
-memes_folder = input("Please enter the path to the memes folder: ")
+memes_folder = input("Please enter the path to the memes folder: ") # std input for folder to analyze
 
 memes_analysis, sentiment_counts = analyze_all_memes_in_folder(memes_folder)
 
+# Outputs
 for meme in memes_analysis:
     print(f"File: {meme['filename']}")
     print(f"  Meme Name: {meme['analysis']['meme_name']}")
