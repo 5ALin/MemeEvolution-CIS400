@@ -1,4 +1,3 @@
-
 # Meme Evolution - Data Analysis
 
 This program provides an automated way to analyze memes by extracting text, classifying the format, determining the topic, and evaluating sentiment.
@@ -14,16 +13,30 @@ The program performs the following:
 ## Prerequisites
 
 Before running the script, make sure you have the following Python packages installed:
+* ``` opencv-python```
 
-* ```pandas``` for data manipulation
-* ```scikit-learn``` for topic modeling (LDA) and text vectorization
-* ```json``` for handling JSON data files
+* ```pytesseract```
+
+* ```numpy```
+
+* ```torch```
+
+* ```torchvision```
+
+* ```transformers```
+
+* ```Pillow```
+
+* ```tf-keras```
+
+*```rapidfuzz```
+
 If you do not have these dependencies installed, follow the steps below to install them
 ## Installation
 
 Install the required dependencies using pip:
 ```bash 
-  pip install opencv-python pytesseract torch torchvision transformers Pillow numpy
+  pip install opencv-python pytesseract torch torchvision transformers Pillow numpy tf-keras rapidfuzz
 ```
 Download Tesseract OCR from the following link: 
 
@@ -31,7 +44,9 @@ https://github.com/UB-Mannheim/tesseract/wiki
 
 * Run the installer and note the installation directory (e.g., C:\Program Files\Tesseract-OCR).
 
-* Add Tesseract to the PATH:
+* Add Tesseract to the PATH via Environment Variables
+
+* Verify Tesseract installation by using ```tesseract --version``` in a terminal
 
     
 ## Running the Program
@@ -87,7 +102,7 @@ Meme Format: Drake Hotline Bling
 ## Modifications
 
 * **Known Memes:** The known_memes dictionary can be expanded with additional meme formats and their descriptions.
-* **Topics: The possible labels** for topic inference (politics, work, relationships, etc.) can be modified to fit your needs.
+* **Topics:** The possible labels for topic inference (politics, work, relationships, etc.) can be modified to fit your needs.
 * **Sentiment Analysis Model:** You can change the sentiment analysis model to another pre-trained model from Hugging Face if desired.
 ## Troubleshooting
 
