@@ -13,7 +13,7 @@ The program performs the following:
 ## Prerequisites
 
 Before running the script, make sure you have the following Python packages installed:
-* ``` opencv-python```
+* ```opencv-python```
 
 * ```pytesseract```
 
@@ -29,14 +29,12 @@ Before running the script, make sure you have the following Python packages inst
 
 * ```tf-keras```
 
-*```rapidfuzz```
-
 If you do not have these dependencies installed, follow the steps below to install them
 ## Installation
 
 Install the required dependencies using pip:
 ```bash 
-  pip install opencv-python pytesseract torch torchvision transformers Pillow numpy tf-keras rapidfuzz
+  pip install opencv-python pytesseract torch torchvision transformers Pillow numpy tf-keras
 ```
 Download Tesseract OCR from the following link: 
 
